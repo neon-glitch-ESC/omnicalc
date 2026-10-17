@@ -28,7 +28,7 @@ Then open the printed URL. In Chrome/Edge use the install icon in the address ba
 
 ## Tests
 
-Open `tests.html` in a browser. ~50 assertions cover the expression parser, every conversion family (sample reference values), number systems, live-data payload parsers, search parsing and data integrity. No test framework needed.
+Open `tests.html` in a browser. 43 assertions cover the expression parser, every conversion family (sample reference values), number systems, live-data payload parsers, search parsing and data integrity. No test framework needed.
 
 Command-line alternatives (no dependencies): `node tools/run-tests.js` runs the same suite in Node, and `tools/debug-layout.html` opened in a browser audits every page for horizontal overflow at phone widths inside 390px iframes.
 
@@ -50,6 +50,10 @@ js/
 tools/refresh-icons.ps1   regenerates the subsetted icon font + js/icons.js
 tests.html + js/tests.js  zero-dependency test runner
 ```
+
+## Version history
+
+See [CHANGELOG.md](CHANGELOG.md) for what changed in each release.
 
 ## Notes & known limits
 

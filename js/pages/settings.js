@@ -103,7 +103,7 @@
 
       '<div class="panel mt-3">' +
       '    <span class="panel-title">About & privacy</span>' +
-      '    <p class="small muted">OmniCalc v1.0 — pure HTML/CSS/JS PWA. All calculations run locally; no accounts, no analytics, no server. ' +
+      '    <p class="small muted">OmniCalc v1.1.1 - pure HTML/CSS/JS PWA. All calculations run locally; no accounts, no analytics, no server. ' +
       'Live fiat rates come from the open exchangerate-api endpoint and crypto prices from CoinGecko; if both are unreachable, bundled reference values are used and clearly labelled. ' +
       'Conversion factors use NIST/ISO reference values. Nothing you type is ever uploaded.</p>' +
       '</div>');
