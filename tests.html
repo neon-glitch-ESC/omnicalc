@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniCalc — Test Runner</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    body { padding: 2rem; }
+    .test-pass { color: #3e7a1e; font-weight: 600; }
+    .test-fail { color: #b3261e; font-weight: 700; }
+    .test-row { font-family: var(--font-mono); font-size: .9rem; padding: .35rem .5rem; border-bottom: 1px dashed var(--line-soft); }
+    .test-row .msym { font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1 class="editorial" style="margin-bottom:1rem">OmniCalc test runner</h1>
+  <p class="muted" style="margin-bottom:1.5rem">Hand-rolled assertions, zero dependencies. Open this page and check the summary below.</p>
+  <div class="panel" id="summary">Running…</div>
+  <div class="panel" id="results" style="max-height:70vh;overflow:auto"></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/data/units-core.js"></script>
+  <script src="js/data/units-eng.js"></script>
+  <script src="js/data/finance.js"></script>
+  <script src="js/data/culinary.js"></script>
+  <script src="js/data/apparel.js"></script>
+  <script src="js/expr.js"></script>
+  <script src="js/converters/generic.js"></script>
+  <script src="js/converters/live.js"></script>
+  <script src="js/converters/custom.js"></script>
+  <script src="js/tools/numbers.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/tests.js"></script>
+</body>
+</html>

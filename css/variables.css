@@ -1,0 +1,91 @@
+/* OmniCalc - variables.css
+   Design tokens: lime / paper editorial system + dark theme.
+   Palette and typography follow the provided brand CSS. */
+
+:root {
+  /* Native controls (date pickers, select popups, scrollbars) follow the theme */
+  color-scheme: light;
+
+  /* Brand palette */
+  --color-dark: #14170a;
+  --color-white: #ffffff;
+  --color-lime: #cbe376;
+  --color-lime-light: #eef7ca;
+  --color-neutral-bg: #f9fbf2;
+  --color-border: #14170a;
+
+  /* Editorial / utility fonts */
+  --font-editorial: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Google Sans Flex', 'Google Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Semantic tokens (light theme) */
+  --page: var(--color-white);
+  --paper: var(--color-white);
+  --paper-2: var(--color-neutral-bg);
+  --paper-3: #f2f6e2;
+  --ink: var(--color-dark);
+  --ink-soft: rgba(20, 23, 10, 0.72);
+  --ink-faint: rgba(20, 23, 10, 0.45);
+  --line: var(--color-dark);
+  --line-soft: rgba(20, 23, 10, 0.16);
+  --shadow-c: var(--color-dark);
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --focus: #7fa312;
+  --on-accent: #14170a;
+  --lime: var(--color-lime);
+  --lime-soft: var(--color-lime-light);
+  --lime-deep: #d8ed8d;
+
+  /* Sidebar (always dark in light theme; deeper in dark theme) */
+  --sidebar-bg: #14170a;
+  --sidebar-ink: #ecefe2;
+  --sidebar-dim: rgba(236, 239, 226, 0.55);
+  --sidebar-line: rgba(236, 239, 226, 0.14);
+  --sidebar-hover: rgba(255, 255, 255, 0.07);
+  --sidebar-active: rgba(255, 255, 255, 0.1);
+
+  /* Shadow used on lime-filled elements (lime shadow on lime is invisible) */
+  --shadow-on-lime: var(--color-dark);
+
+  /* Hard shadows */
+  --shadow-hard-sm: 4px 4px 0px var(--shadow-c);
+  --shadow-hard-md: 8px 8px 0px var(--shadow-c);
+  --shadow-hard-lg: 12px 12px 0px var(--shadow-c);
+  --shadow-lime-md: 8px 8px 0px var(--lime);
+
+  /* Geometry */
+  --header-h: 72px;
+  --sidebar-w: 264px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --ease: 150ms ease-in-out;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #12150a;
+  --paper: #1a1f0e;
+  --paper-2: #171b0c;
+  --paper-3: #202612;
+  --ink: #eef3dd;
+  --ink-soft: rgba(238, 243, 221, 0.75);
+  --ink-faint: rgba(238, 243, 221, 0.45);
+  --line: #eef3dd;
+  --line-soft: rgba(238, 243, 221, 0.22);
+  --shadow-c: var(--color-lime);
+  --header-bg: rgba(18, 21, 10, 0.92);
+  --focus: var(--color-lime);
+  --sidebar-bg: #0c0f05;
+  --sidebar-hover: rgba(238, 243, 221, 0.08);
+  --sidebar-active: rgba(238, 243, 221, 0.12);
+  --lime-soft: #2a3313;
+  --shadow-on-lime: #f2f7e1;
+}

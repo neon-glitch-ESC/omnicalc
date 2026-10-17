@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OmniCalc layout debug (parallel)</title>
+<style>
+  body { font-family: Consolas, monospace; font-size: 13px; margin: 12px; }
+  #out { white-space: pre-wrap; background: #111; color: #9f9; padding: 12px; }
+  iframe { border: 1px solid #ccc; background: #fff; }
+  .frames { display: flex; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+<h1>OmniCalc parallel layout audit @390px iframes</h1>
+<div id="out">running…</div>
+<div class="frames">
+  <iframe data-page="home" src="../index.html?theme=light#home" width="390" height="500"></iframe>
+  <iframe data-page="basic" src="../index.html?theme=light#basic" width="390" height="500"></iframe>
+  <iframe data-page="scientific" src="../index.html?theme=light#scientific" width="360" height="500"></iframe>
+  <iframe data-page="programmer" src="../index.html?theme=light#programmer" width="390" height="500"></iframe>
+  <iframe data-page="length" src="../index.html?theme=light#length" width="390" height="500"></iframe>
+  <iframe data-page="temperature" src="../index.html?theme=light#temperature" width="390" height="500"></iframe>
+  <iframe data-page="currency" src="../index.html?theme=light#currency" width="390" height="500"></iframe>
+  <iframe data-page="crypto" src="../index.html?theme=light#crypto" width="390" height="500"></iframe>
+  <iframe data-page="health" src="../index.html?theme=light#health" width="390" height="500"></iframe>
+  <iframe data-page="culinary" src="../index.html?theme=light#culinary" width="390" height="500"></iframe>
+  <iframe data-page="apparel" src="../index.html?theme=light#apparel" width="390" height="500"></iframe>
+  <iframe data-page="numbers" src="../index.html?theme=light#numbers" width="390" height="500"></iframe>
+  <iframe data-page="datetime" src="../index.html?theme=light#datetime" width="390" height="500"></iframe>
+  <iframe data-page="matrix" src="../index.html?theme=light#matrix" width="390" height="500"></iframe>
+  <iframe data-page="financial" src="../index.html?theme=light#financial" width="390" height="500"></iframe>
+  <iframe data-page="graphing" src="../index.html?theme=light#graphing" width="390" height="500"></iframe>
+  <iframe data-page="custom" src="../index.html?theme=light#custom" width="390" height="500"></iframe>
+  <iframe data-page="settings" src="../index.html?theme=light#settings" width="390" height="500"></iframe>
+</div>
+<script>
+  var results = [];
+  function audit(frame) {
+    var page = frame.getAttribute('data-page');
+    var win = frame.contentWindow;
+    var d = win.document;
+    var root = d.documentElement;
+    var vw = root.clientWidth;
+    var worst = [];
+    Array.prototype.forEach.call(d.querySelectorAll('.page *'), function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.right > vw + 2) {
+        worst.push({
+          sel: (el.id ? '#' + el.id : '') + (typeof el.className === 'string' && el.className ? '.' + el.className.trim().split(/\s+/)[0] : ''),
+          w: Math.round(r.width),
+          right: Math.round(r.right)
+        });
+      }
+    });
+    return { page: page, vw: vw, docW: root.scrollWidth, overflow: root.scrollWidth > vw + 1, worst: worst.slice(0, 5) };
+  }
+  var frames = document.querySelectorAll('iframe');
+  frames.forEach(function (f) {
+    f.addEventListener('load', function () {
+      try { results.push(audit(f)); } catch (e) { results.push({ page: f.getAttribute('data-page'), error: e.message }); }
+      if (results.length === frames.length) {
+        document.getElementById('out').textContent = JSON.stringify(results.sort(function (a, b) {
+          return (b.overflow ? 1 : 0) - (a.overflow ? 1 : 0);
+        }), null, 1);
+      } else {
+        document.getElementById('out').textContent = 'loaded ' + results.length + '/' + frames.length + '…';
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>OmniCalc — The Universal Calculator &amp; Converter</title>
+  <meta name="description" content="One installable web app for every calculator and unit converter: scientific, financial, cooking, currency, engineering, health and 300+ conversions — fully offline capable, no backend.">
+  <meta name="theme-color" content="#cbe376">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg">
+
+  <!-- Fonts: locally subsetted Material Symbols icon font + Google text fonts (cached by SW) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="msym" aria-hidden="true"></span>
+        </button>
+        <a class="brand-logo-wrap" href="#home" aria-label="OmniCalc home">
+          <span class="brand-mark"><span class="msym" data-icon="calculate" aria-hidden="true"></span></span>
+          <span class="brand-name">OmniCalc</span>
+          <span class="brand-badge">Universal</span>
+        </a>
+      </div>
+
+      <div class="search-wrap" role="search">
+        <span class="msym search-icon" data-icon="search" aria-hidden="true"></span>
+        <input type="search" id="globalSearch" class="search-input" placeholder="Try &quot;10 km to miles&quot; or &quot;tip&quot;"
+               autocomplete="off" spellcheck="false" aria-label="Universal search: type a quantity to convert, or a tool name">
+        <div class="search-results" id="globalSearchResults" role="listbox" aria-label="Search results"></div>
+      </div>
+
+      <div class="header-right">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="msym" data-icon="dark_mode" id="themeIcon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ TICKER ============================ -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-move">
+      <span class="ticker-item">1 mile = 1.609344 km<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">0 °C = 32 °F = 273.15 K<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">300+ converters<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 GiB = 1,024 MiB<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 hp = 745.7 W<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 cup flour ≈ 120 g<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">π ≈ 3.14159265<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 knot = 1.852 km/h<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 BTC = 100,000,000 satoshi<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">no servers · works offline<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 mile = 1.609344 km<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">0 °C = 32 °F = 273.15 K<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">300+ converters<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 GiB = 1,024 MiB<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 hp = 745.7 W<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 cup flour ≈ 120 g<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">π ≈ 3.14159265<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 knot = 1.852 km/h<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">1 BTC = 100,000,000 satoshi<span class="ticker-star">✦</span></span>
+      <span class="ticker-item">no servers · works offline<span class="ticker-star">✦</span></span>
+    </div>
+  </div>
+
+  <!-- ============================ APP SHELL ============================ -->
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <nav class="sidebar-scroll" id="sidebarNav"><!-- built by app.js --></nav>
+      <div class="sb-bottom" id="sidebarBottom"><!-- settings link injected by app.js --></div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="content" id="app-content">
+      <div class="page">
+        <div class="page-loading">Loading OmniCalc…</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>OmniCalc</h3>
+          <p>The universal calculator and converter. Pure HTML, CSS and JavaScript — no accounts, no servers, everything stays in your browser.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Tools</h4>
+            <ul>
+              <li><a href="#scientific">Scientific calculator</a></li>
+              <li><a href="#financial">Financial calculators</a></li>
+              <li><a href="#currency">Currency converter</a></li>
+              <li><a href="#culinary">Cooking converter</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Data</h4>
+            <ul>
+              <li><a href="#settings">Offline &amp; rates status</a></li>
+              <li><a href="#settings">Export / import data</a></li>
+              <li><a href="#settings">Clear local data</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>About</h4>
+            <ul>
+              <li><a href="#settings">Settings</a></li>
+              <li><a href="#settings">Privacy</a></li>
+              <li><a href="#custom">Custom converters</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>OmniCalc v1.0 — a static, offline-first PWA. <span class="mono">No eval(), no tracking, no backend.</span></span>
+        <span>Live rates by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">exchangerate-api</a> &amp; <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================ SCRIPTS (classic, no build step) ============================ -->
+  <script src="js/icons.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/data/units-core.js"></script>
+  <script src="js/data/units-eng.js"></script>
+  <script src="js/data/finance.js"></script>
+  <script src="js/data/culinary.js"></script>
+  <script src="js/data/apparel.js"></script>
+  <script src="js/expr.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/converters/generic.js"></script>
+  <script src="js/converters/live.js"></script>
+  <script src="js/converters/custom.js"></script>
+  <script src="js/tools/numbers.js"></script>
+  <script src="js/tools/health.js"></script>
+  <script src="js/tools/culinary.js"></script>
+  <script src="js/tools/apparel.js"></script>
+  <script src="js/calculators/basic.js"></script>
+  <script src="js/calculators/scientific.js"></script>
+  <script src="js/calculators/programmer.js"></script>
+  <script src="js/calculators/financial.js"></script>
+  <script src="js/calculators/datetime.js"></script>
+  <script src="js/calculators/graphing.js"></script>
+  <script src="js/calculators/matrix.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/settings.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

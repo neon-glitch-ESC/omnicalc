@@ -1,0 +1,15 @@
+# OmniCalc - ignore rules
+
+# Editor / OS cruft
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+*.log
+
+# Node tooling (the app itself needs no node_modules; only optional dev helpers)
+node_modules/
+
+# Local preview server output / screenshots
+*.tmp.html
+*.tmp.png

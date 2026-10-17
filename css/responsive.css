@@ -1,0 +1,157 @@
+/* OmniCalc - responsive.css
+   Breakpoints: mobile < 600px, tablet 600-1024px, desktop > 1024px */
+
+/* ------------------------------------------------------------------
+   Tablet & below: sidebar becomes off-canvas
+   ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-105%);
+    box-shadow: none;
+    width: 280px;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 12px 0 0 0 rgba(20, 23, 10, 0.25);
+  }
+
+  .content,
+  .site-footer {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+
+  .brand-badge {
+    display: none;
+  }
+
+  .search-wrap {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 0 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .brand-name {
+    font-size: 1.3rem;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .page {
+    padding: 1.5rem 1.1rem 3rem;
+  }
+
+  .search-wrap {
+    max-width: none;
+  }
+
+  .search-when-mobile-hidden {
+    display: none;
+  }
+
+  .hero-home {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .conv-card,
+  .panel {
+    padding: 1.1rem;
+    box-shadow: 6px 6px 0px var(--shadow-c);
+  }
+
+  .conv-row {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  /* Keep calculator grids in their designed column counts — just tighten
+     the keys. Re-flowing a 5/6-wide keypad scrambles the operator rows. */
+  .keypad { gap: 0.45rem; }
+
+  .key {
+    padding: 0.65rem 0.1rem;
+    font-size: 0.92rem;
+    min-height: 44px;
+  }
+
+  .keypad.cols-6 .key {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.05rem;
+  }
+
+  .key .msym { font-size: 18px; }
+
+  .matrix-cell { min-width: 40px; }
+
+  .footer-links { gap: 2rem; }
+
+  .site-footer { padding: 2.25rem 1.1rem 2rem; }
+
+  .value-card { box-shadow: 6px 6px 0px var(--shadow-c); }
+}
+
+@media (max-width: 480px) {
+  .brand-badge,
+  .header-right .btn-label {
+    display: none;
+  }
+
+  .calc-badges .tag {
+    font-size: 0.62rem;
+    padding: 0.14rem 0.4rem;
+  }
+
+  /* Keys get denser, never re-flowed */
+  .keypad { gap: 0.32rem; }
+
+  .key {
+    padding: 0.55rem 0.05rem;
+    font-size: 0.82rem;
+    min-height: 40px;
+  }
+
+  .keypad.cols-6 .key { font-size: 0.68rem; }
+
+  .key .msym { font-size: 16px; }
+
+  .search-input { font-size: 0.88rem; }
+
+  .page-title { font-size: 1.6rem; }
+}
+
+/* ------------------------------------------------------------------
+   Wide desktops
+   ------------------------------------------------------------------ */
+@media (min-width: 1600px) {
+  .page {
+    max-width: 1280px;
+  }
+}
+
+/* Print: keep pages readable */
+@media print {
+  .site-header,
+  .ticker-wrap,
+  .sidebar,
+  .site-footer,
+  .page-actions,
+  .sidebar-overlay {
+    display: none !important;
+  }
+
+  body { padding-top: 0; }
+  .content, .site-footer { margin-left: 0; }
+  .panel, .conv-card, .calc-card { box-shadow: none; }
+}

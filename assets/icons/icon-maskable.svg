@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Maskable variant: content safely inside the 80% safe zone -->
+  <rect width="512" height="512" fill="#14170a"/>
+  <rect x="136" y="110" width="240" height="292" rx="32" fill="#cbe376" stroke="#14170a" stroke-width="10"/>
+  <rect x="166" y="142" width="180" height="70" rx="12" fill="#14170a"/>
+  <rect x="166" y="244" width="76" height="48" rx="10" fill="#14170a"/>
+  <rect x="182" y="260" width="44" height="16" rx="5" fill="#cbe376"/>
+  <rect x="270" y="244" width="76" height="48" rx="10" fill="#14170a"/>
+  <rect x="286" y="260" width="44" height="16" rx="5" fill="#cbe376"/>
+  <rect x="166" y="318" width="76" height="48" rx="10" fill="#14170a"/>
+  <rect x="182" y="334" width="44" height="16" rx="5" fill="#cbe376"/>
+  <rect x="270" y="318" width="76" height="48" rx="10" fill="#ffffff" stroke="#14170a" stroke-width="8"/>
+</svg>

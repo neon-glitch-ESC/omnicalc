@@ -1,0 +1,400 @@
+/* OmniCalc - layout.css
+   App shell: header, kinetic ticker, sidebar, content column, footer. */
+
+body {
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  padding-top: var(--header-h);
+}
+
+/* ------------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------------ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  background-color: var(--header-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--line);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  width: 100%;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  background-color: var(--lime);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow-hard-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #14170a;
+  flex-shrink: 0;
+}
+
+.brand-mark .msym {
+  font-size: 24px;
+}
+
+.brand-name {
+  font-family: var(--font-editorial);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-badge {
+  background: var(--ink);
+  color: var(--lime);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------
+   KINETIC MARQUEE
+   ------------------------------------------------------------------ */
+.ticker-wrap {
+  width: 100%;
+  background-color: var(--lime);
+  border-bottom: 2px solid var(--line);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.55rem 0;
+  color: #14170a;
+}
+
+.ticker-move {
+  display: inline-block;
+  animation: ticker 60s linear infinite;
+  will-change: transform;
+}
+
+.ticker-wrap:hover .ticker-move {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 1.25rem;
+}
+
+.ticker-star {
+  margin-left: 1.25rem;
+  opacity: 0.85;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ------------------------------------------------------------------
+   APP SHELL
+   ------------------------------------------------------------------ */
+.app-shell {
+  display: flex;
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* ------------------------------------------------------------------
+   SIDEBAR
+   ------------------------------------------------------------------ */
+.sidebar {
+  position: fixed;
+  top: var(--header-h);
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-ink);
+  border-right: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  transition: transform 220ms ease;
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 0.85rem 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(238, 243, 221, 0.25) transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(238, 243, 221, 0.22);
+  border-radius: 8px;
+}
+
+.sb-group {
+  margin-bottom: 1.4rem;
+}
+
+.sb-group-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--sidebar-dim);
+  padding: 0.55rem 0.85rem 0.45rem;
+}
+
+.sb-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  color: var(--sidebar-ink);
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: background-color var(--ease), color var(--ease);
+  user-select: none;
+}
+
+.sb-link .msym {
+  font-size: 1.3rem;
+  width: 24px;
+  text-align: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.sb-link:hover {
+  background-color: var(--sidebar-hover);
+  color: #ffffff;
+}
+
+.sb-link.active {
+  background-color: var(--sidebar-active);
+  color: var(--lime);
+}
+
+.sb-link.active::before {
+  content: '';
+  position: absolute;
+  left: -0.85rem;
+  top: 18%;
+  bottom: 18%;
+  width: 4px;
+  background-color: var(--lime);
+  border-radius: 0 4px 4px 0;
+}
+
+.sb-link.sb-link-static {
+  cursor: default;
+}
+
+.sb-external {
+  margin-left: auto;
+  font-size: 1rem !important;
+  opacity: 0.5;
+}
+
+.sb-bottom {
+  border-top: 1px solid var(--sidebar-line);
+  padding: 0.7rem 0.85rem;
+  background-color: var(--sidebar-bg);
+}
+
+.sb-bottom .sb-link.active::before {
+  left: -0.85rem;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  background: rgba(10, 12, 4, 0.5);
+  z-index: 190;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------------------
+   MAIN CONTENT
+   ------------------------------------------------------------------ */
+.content {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sidebar-w);
+}
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.25rem 2rem 4rem;
+}
+
+.page-loading {
+  padding: 4rem 2rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------------ */
+.site-footer {
+  margin-left: var(--sidebar-w);
+  background-color: #14170a;
+  color: #ffffff;
+  border-top: 3px solid var(--line);
+  padding: 3rem 2rem 2.5rem;
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-editorial);
+  font-size: 2rem;
+  color: var(--color-lime);
+  margin-bottom: 0.4rem;
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 380px;
+  font-size: 0.92rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.footer-col h4 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-lime);
+  margin-bottom: 0.9rem;
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-col a {
+  color: #ffffff;
+  font-size: 0.92rem;
+  opacity: 0.8;
+  transition: opacity var(--ease), color var(--ease);
+  cursor: pointer;
+}
+
+.footer-col a:hover {
+  opacity: 1;
+  color: var(--color-lime);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-bottom a {
+  color: var(--color-lime);
+  cursor: pointer;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+   SIDEBAR TOGGLE (responsive)
+   ------------------------------------------------------------------ */
+.sidebar-toggle {
+  display: none;
+}

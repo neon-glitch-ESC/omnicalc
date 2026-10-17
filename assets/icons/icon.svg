@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- OmniCalc mark: lime calculator card on dark ink, paper-brutalist style -->
+  <rect width="512" height="512" rx="96" fill="#14170a"/>
+  <rect x="112" y="86" width="288" height="340" rx="36" fill="#cbe376" stroke="#14170a" stroke-width="10"/>
+  <rect x="146" y="122" width="220" height="84" rx="14" fill="#14170a"/>
+  <rect x="146" y="244" width="92" height="56" rx="12" fill="#14170a"/>
+  <rect x="164" y="262" width="56" height="20" rx="6" fill="#cbe376"/>
+  <rect x="274" y="244" width="92" height="56" rx="12" fill="#14170a"/>
+  <rect x="292" y="262" width="56" height="20" rx="6" fill="#cbe376"/>
+  <rect x="146" y="330" width="92" height="56" rx="12" fill="#14170a"/>
+  <rect x="154" y="348" width="76" height="20" rx="6" fill="#cbe376"/>
+  <rect x="274" y="330" width="92" height="56" rx="12" fill="#ffffff" stroke="#14170a" stroke-width="8"/>
+</svg>
