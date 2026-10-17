@@ -8,14 +8,11 @@ A single-page, installable web app in **pure HTML5 + CSS3 + vanilla JavaScript**
 - **Converters** — 30+ categories and 300+ units: length, mass, volume, area, temperature (7 scales incl. Réaumur/Delisle/Newton), speed, time, angle, pressure, energy, power, force, torque, flow, viscosity (dynamic + kinematic), fuel economy, digital storage (1000 vs 1024), transfer rates, screen/typography, radiation, historic & obscure units (cubit, smoot, shaku, li, verst…), cooking (ingredient densities, oven marks, recipe scaler), apparel sizing, number systems & encodings (base-N, Roman, Unicode, Base64, Morse), custom formula builder.
 - **Live data** — fiat currency (exchangerate-api, 120+ codes), crypto (CoinGecko, ~50 coins), precious metals (editable reference prices), pre-Euro currencies at exact legal rates. All cached to localStorage; offline fallback with clear "cached/offline" banners.
 - **Everything local** — favorites, calculator history, custom converters, world-clock zones and settings live in `localStorage`. Export/import JSON in Settings; "Clear all data" wipes it.
-- **Style** — lime + paper editorial system (Playfair Display / Google Sans / Fira Code), hard shadows, dark sidebar, full dark mode, Material Symbols icons (locally subsetted, 88 KB, works offline).
+- **Style** — cold "Monet" palette: indigo night surfaces, light-blue accents, violet secondary highlights. Paper-style editorial system (Playfair Display / Google Sans / Fira Code), hard offset shadows, dark sidebar with a collapsible desktop sidebar and off-canvas drawer on mobile. Dark-only by design — no theme switching. Material Symbols icons (locally subsetted, 88 KB, works offline).
 
 ## Run it
 
 Double-click `index.html` — everything except the service worker works from `file://`.
-
-Add `?theme=dark` or `?theme=light` to the URL to force a theme (handy for demos):
-`index.html?theme=light#scientific`
 
 For the full PWA (offline cache + install prompt), serve the folder over http(s):
 

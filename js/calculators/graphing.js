@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var COLORS = ['#cbe376', '#2d6cdf', '#e2574c'];
+  var COLORS = ['#8fb8ff', '#b9a3ff', '#7ce0d3'];
 
   function renderGraphing(el) {
     var page = OC.ui.mount(el, OC.ui.pageHead({
@@ -123,11 +123,11 @@
       var ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var ink = dark ? '#eef3dd' : '#14170a';
-      var grid = dark ? 'rgba(238,243,221,0.15)' : 'rgba(20,23,10,0.12)';
+      /* Cold palette is the only theme: indigo canvas, cold-white ink. */
+      var ink = '#e8edff';
+      var grid = 'rgba(232,237,255,0.15)';
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = dark ? '#1a1f0e' : '#ffffff';
+      ctx.fillStyle = '#131a38';
       ctx.fillRect(0, 0, w, h);
 
       var x2px = function (x) { return (x - view.xmin) / (view.xmax - view.xmin) * w; };
@@ -139,7 +139,7 @@
       ctx.strokeStyle = grid;
       ctx.lineWidth = 1;
       ctx.font = '11px Fira Code, monospace';
-      ctx.fillStyle = dark ? 'rgba(238,243,221,0.7)' : 'rgba(20,23,10,0.6)';
+      ctx.fillStyle = 'rgba(232,237,255,0.7)';
 
       for (var gx = Math.ceil(view.xmin / xStep) * xStep; gx <= view.xmax; gx += xStep) {
         var px = x2px(gx);

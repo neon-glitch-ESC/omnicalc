@@ -113,9 +113,7 @@
     OC.calcKit.wireKeypad(page, engine, {
       onEquals: commit,
       '__ans': function () { engine.append(String(OC.ANS)); render(); }
-    });
-
-    OC.qs('#scKeys', page).addEventListener('click', render);
+    }, render);
 
     OC.qsa('#scAngles .tag', page).forEach(function (tag) {
       tag.addEventListener('click', function () {
@@ -153,7 +151,7 @@
       '(': function () { engine.append('('); render(); },
       ')': function () { engine.append(')'); render(); },
       '.': function () { engine.append('.'); render(); },
-      '%': function () { engine.append('percent'); render(); }
+      '%': function () { engine.append('/100'); render(); }
     };
     '0123456789'.split('').forEach(function (d) {
       keyMap[d] = function (e) { engine.append(e.key); render(); };

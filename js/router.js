@@ -85,6 +85,13 @@
         OC.hydrateIcons(container);
       }
 
+      /* Ticker marquee and site footer are home-page chrome only */
+      var isHome = route.id === 'home';
+      var ticker = document.querySelector('.ticker-wrap');
+      var footer = document.querySelector('.site-footer');
+      if (ticker) ticker.style.display = isHome ? '' : 'none';
+      if (footer) footer.style.display = isHome ? '' : 'none';
+
       OC.bus.emit('route', route.id);
     },
 

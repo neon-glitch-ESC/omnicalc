@@ -81,8 +81,8 @@ hr {
 }
 
 ::selection {
-  background: var(--lime);
-  color: #14170a;
+  background: var(--accent);
+  color: #0a0f22;
 }
 
 /* Accessible focus ring for keyboard users */

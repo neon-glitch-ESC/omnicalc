@@ -38,7 +38,7 @@
       '<section class="hero-home">' +
       '  <span class="hero-home-pill">' + OC.iconHTML('offline_bolt') + 'Offline-first · zero servers</span>' +
       '  <h1 class="hero-home-title">Convert anything. ' +
-      '    <span class="highlight-lime">Calculate</span> <span class="italic-text">everything.</span></h1>' +
+      '    <span class="highlight-accent">Calculate</span> <span class="italic-text">everything.</span></h1>' +
       '  <p class="hero-home-sub">One installable app for 300+ conversions and a full calculator suite — ' +
       '    currency, cooking, engineering, health, finance and more. Works with your Wi-Fi off.</p>' +
       '  <div class="search-wrap hero-search">' +
@@ -73,8 +73,8 @@
       '  Static conversion tables ship with the app; live currency and crypto rates are fetched when online and cached for offline use. ' +
       '  Favorites, history and custom converters live only in your browser.</p>' +
       '  <div class="row mt-2">' +
-      '    <span class="tag tag-lime">No accounts</span><span class="tag tag-lime">No tracking</span>' +
-      '    <span class="tag tag-lime">Installable PWA</span><span class="tag tag-lime">No eval()</span>' +
+      '    <span class="tag tag-accent">No accounts</span><span class="tag tag-accent">No tracking</span>' +
+      '    <span class="tag tag-accent">Installable PWA</span><span class="tag tag-accent">No eval()</span>' +
       '  </div>' +
       '</div>');
 

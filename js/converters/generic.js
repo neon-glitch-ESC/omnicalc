@@ -186,7 +186,7 @@
             var html = cat.units.map(function (u) {
               if (u.id === toSel.value) return '';
               var out = OC.convertIn(id, v, fromSel.value, u.id);
-              var active = u.id === fromSel.value ? ' style="background:var(--lime-soft);"' : '';
+              var active = u.id === fromSel.value ? ' style="background:var(--accent-soft);"' : '';
               return '<div class="unit-row" data-unit="' + OC.esc(u.id) + '"' + active + ' title="Click to convert into ' + OC.esc(u.label) + '">' +
                 '<span class="unit-row-name">' + OC.esc(u.label) + '</span>' +
                 '<span class="unit-row-value">' + OC.formatNumber(out, { decimals: 'auto' }) + '</span></div>';

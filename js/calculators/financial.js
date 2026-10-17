@@ -37,13 +37,12 @@
     var min = Math.min(0, Math.min.apply(null, values));
     if (max === min) max = min + 1;
 
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    var ink = isDark ? '#eef3dd' : '#14170a';
-    var lime = '#cbe376';
+    var ink = '#e8edff';
+    var accent = '#8fb8ff';
 
     /* grid + y labels */
-    ctx.strokeStyle = isDark ? 'rgba(238,243,221,0.18)' : 'rgba(20,23,10,0.14)';
-    ctx.fillStyle = isDark ? 'rgba(238,243,221,0.75)' : 'rgba(20,23,10,0.65)';
+    ctx.strokeStyle = 'rgba(232,237,255,0.18)';
+    ctx.fillStyle = 'rgba(232,237,255,0.75)';
     ctx.font = '11px Fira Code, monospace';
     ctx.lineWidth = 1;
     var steps = 4;
@@ -75,7 +74,7 @@
     ctx.lineTo(pad.l + iw, pad.t + ih);
     ctx.lineTo(pad.l, pad.t + ih);
     ctx.closePath();
-    ctx.fillStyle = lime;
+    ctx.fillStyle = accent;
     ctx.globalAlpha = 0.45;
     ctx.fill();
     ctx.globalAlpha = 1;

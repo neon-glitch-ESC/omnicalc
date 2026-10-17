@@ -118,7 +118,7 @@
       wrap.innerHTML = rows.map(function (r) {
         return '<div class="panel" style="box-shadow:var(--shadow-hard-sm);margin-bottom:1rem;padding:1rem 1.2rem;">' +
           '<div class="row spread"><strong style="font-size:1.15rem">' + r.intl + '</strong>' +
-          '<span class="tag tag-lime">US ' + r.us + '</span></div>' +
+          '<span class="tag tag-accent">US ' + r.us + '</span></div>' +
           '<div class="kv-list mt-1">' +
           '<div class="kv"><span class="kv-key">UK</span><span class="kv-val">' + r.uk + '</span></div>' +
           '<div class="kv"><span class="kv-key">EU</span><span class="kv-val">' + r.eu + '</span></div>' +

@@ -13,16 +13,12 @@
 
   .sidebar.open {
     transform: translateX(0);
-    box-shadow: 12px 0 0 0 rgba(20, 23, 10, 0.25);
+    box-shadow: 12px 0 0 0 rgba(4, 7, 20, 0.45);
   }
 
   .content,
   .site-footer {
     margin-left: 0;
-  }
-
-  .sidebar-toggle {
-    display: inline-flex;
   }
 
   .brand-badge {

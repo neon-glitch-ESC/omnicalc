@@ -58,7 +58,6 @@
   /* ---------------- settings ---------------- */
 
   var DEFAULTS = {
-    theme: 'light',            /* 'light' | 'dark' */
     decimals: 'auto',          /* 'auto' | 0..12 */
     grouping: true,            /* thousands separators */
     unitSystem: 'metric',      /* 'metric' | 'imperial' */
@@ -78,14 +77,13 @@
     return settings;
   };
 
-  OC.applyTheme = function (theme) {
-    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#12150a' : '#cbe376');
-    var icon = document.getElementById('themeIcon');
-    if (icon && OC.ICONS) {
-      icon.textContent = theme === 'dark' ? OC.ICONS['light_mode'] : OC.ICONS['dark_mode'];
-    }
+  /* ------------------------------------------------------------------
+     UI STATE (sidebar)
+     ------------------------------------------------------------------ */
+
+  OC.uiState = {
+    sidebarCollapsed: function () { return OC.store.read('sidebar_collapsed', false) === true; },
+    setSidebarCollapsed: function (collapsed) { OC.store.write('sidebar_collapsed', !!collapsed); }
   };
 
   /* ---------------- favorites ---------------- */

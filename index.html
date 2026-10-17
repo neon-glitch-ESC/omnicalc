@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>OmniCalc — The Universal Calculator &amp; Converter</title>
   <meta name="description" content="One installable web app for every calculator and unit converter: scientific, financial, cooking, currency, engineering, health and 300+ conversions — fully offline capable, no backend.">
-  <meta name="theme-color" content="#cbe376">
+  <meta name="theme-color" content="#0a0f22">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
   <link rel="apple-touch-icon" href="assets/icons/icon.svg">
@@ -26,8 +26,8 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="header-left">
-        <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <span class="msym" aria-hidden="true"></span>
+        <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation menu" aria-expanded="true" title="Toggle sidebar">
+          <span class="msym" data-icon="menu" aria-hidden="true"></span>
         </button>
         <a class="brand-logo-wrap" href="#home" aria-label="OmniCalc home">
           <span class="brand-mark"><span class="msym" data-icon="calculate" aria-hidden="true"></span></span>
@@ -41,12 +41,6 @@
         <input type="search" id="globalSearch" class="search-input" placeholder="Try &quot;10 km to miles&quot; or &quot;tip&quot;"
                autocomplete="off" spellcheck="false" aria-label="Universal search: type a quantity to convert, or a tool name">
         <div class="search-results" id="globalSearchResults" role="listbox" aria-label="Search results"></div>
-      </div>
-
-      <div class="header-right">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
-          <span class="msym" data-icon="dark_mode" id="themeIcon" aria-hidden="true"></span>
-        </button>
       </div>
     </div>
   </header>

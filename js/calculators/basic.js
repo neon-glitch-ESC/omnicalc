@@ -47,14 +47,17 @@
       }
     }
 
-    /* Wire a [data-key] keypad. keys map: token -> handler override */
-    function wireKeypad(root, engine, handlers) {
+    /* Wire a [data-key] keypad. keys map: token -> handler override.
+       onChange (optional) re-renders the display after every key press —
+       without it the display would lag one key behind. */
+    function wireKeypad(root, engine, handlers, onChange) {
       root.addEventListener('click', function (e) {
         var btn = e.target.closest('[data-key]');
         if (!btn) return;
         var key = btn.getAttribute('data-key');
-        if (handlers && handlers[key]) { handlers[key](btn); return; }
-        defaultAction(engine, key, handlers);
+        if (handlers && handlers[key]) handlers[key](btn);
+        else defaultAction(engine, key, handlers);
+        if (onChange) onChange();
       });
     }
 
@@ -81,19 +84,32 @@
       window.addEventListener('keydown', listener);
     }
 
-    /* Render history tape entries; onPick inserts the result. */
+    /* Render history tape entries; tap a row to reuse its result,
+       use the Clear button to delete all past calculations. */
     function renderHistory(tapeEl, engine, onChange) {
       var list = OC.history.list().slice(0, 20);
       if (!list.length) {
         tapeEl.innerHTML = '<div class="faint small" style="padding:.4rem .6rem">Past calculations appear here — tap one to reuse its result.</div>';
+        tapeEl.onclick = null;
         return;
       }
-      tapeEl.innerHTML = list.map(function (h, i) {
-        return '<div class="history-entry" data-i="' + i + '" title="Use this result">' +
-          '<span class="expr">' + OC.esc(h.expr) + ' =</span>' +
-          '<span class="val">' + OC.esc(OC.formatNumber(h.result, { decimals: 'auto' })) + '</span></div>';
-      }).join('');
+      tapeEl.innerHTML =
+        '<div class="history-head">' +
+        '  <span class="small faint">History</span>' +
+        '  <button class="btn btn-sm btn-ghost" type="button" data-hist="clear" title="Delete all past calculations">' +
+        OC.iconHTML('delete') + ' Clear</button>' +
+        '</div>' +
+        list.map(function (h, i) {
+          return '<div class="history-entry" data-i="' + i + '" title="Use this result">' +
+            '<span class="expr">' + OC.esc(h.expr) + ' =</span>' +
+            '<span class="val">' + OC.esc(OC.formatNumber(h.result, { decimals: 'auto' })) + '</span></div>';
+        }).join('');
       tapeEl.onclick = function (e) {
+        if (e.target.closest('[data-hist="clear"]')) {
+          OC.history.clear();
+          renderHistory(tapeEl, engine, onChange);
+          return;
+        }
         var row = e.target.closest('.history-entry');
         if (!row) return;
         var h = list[parseInt(row.getAttribute('data-i'), 10)];
@@ -195,10 +211,10 @@
       'm+M+': function () { var p = engine.preview(); if (p && p.ok) { memory += p.value; render(); } },
       'm+M-': function () { var p = engine.preview(); if (p && p.ok) { memory -= p.value; render(); } },
       'm+MS': function () { var p = engine.preview(); if (p && p.ok) { memory = p.value; render(); } }
-    });
+    }, render);
 
-    /* keypad and memory buttons re-render the display after any click */
-    OC.qs('.calc-card', page).addEventListener('click', render);
+    /* Note: the shared keypad calls render() after every key press, so the
+       display can never lag behind the expression (no extra listener here). */
 
     OC.calcKit.bindKeyboard('basic', {
       'Enter': function () { commit(); },

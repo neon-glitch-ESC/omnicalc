@@ -60,14 +60,14 @@ body {
 .brand-mark {
   width: 42px;
   height: 42px;
-  background-color: var(--lime);
+  background-color: var(--accent);
   border: 2px solid var(--line);
   border-radius: 10px;
   box-shadow: var(--shadow-hard-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #14170a;
+  color: #0a0f22;
   flex-shrink: 0;
 }
 
@@ -85,13 +85,14 @@ body {
 }
 
 .brand-badge {
-  background: var(--ink);
-  color: var(--lime);
+  background: var(--paper-3);
+  color: var(--accent);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.3rem 0.6rem;
+  border: 1px solid var(--line-soft);
   border-radius: 4px;
   white-space: nowrap;
 }
@@ -101,12 +102,12 @@ body {
    ------------------------------------------------------------------ */
 .ticker-wrap {
   width: 100%;
-  background-color: var(--lime);
+  background-color: var(--accent);
   border-bottom: 2px solid var(--line);
   overflow: hidden;
   white-space: nowrap;
   padding: 0.55rem 0;
-  color: #14170a;
+  color: #0a0f22;
 }
 
 .ticker-move {
@@ -226,7 +227,7 @@ body {
 
 .sb-link.active {
   background-color: var(--sidebar-active);
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .sb-link.active::before {
@@ -236,7 +237,7 @@ body {
   top: 18%;
   bottom: 18%;
   width: 4px;
-  background-color: var(--lime);
+  background-color: var(--accent);
   border-radius: 0 4px 4px 0;
 }
 
@@ -263,7 +264,7 @@ body {
 .sidebar-overlay {
   position: fixed;
   inset: var(--header-h) 0 0 0;
-  background: rgba(10, 12, 4, 0.5);
+  background: rgba(4, 7, 20, 0.6);
   z-index: 190;
   opacity: 0;
   pointer-events: none;
@@ -282,6 +283,7 @@ body {
   flex: 1;
   min-width: 0;
   margin-left: var(--sidebar-w);
+  transition: margin-left 220ms ease;
 }
 
 .page {
@@ -302,10 +304,11 @@ body {
    ------------------------------------------------------------------ */
 .site-footer {
   margin-left: var(--sidebar-w);
-  background-color: #14170a;
-  color: #ffffff;
+  background-color: #0d1330;
+  color: #e8edff;
   border-top: 3px solid var(--line);
   padding: 3rem 2rem 2.5rem;
+  transition: margin-left 220ms ease;
 }
 
 .footer-inner {
@@ -327,7 +330,7 @@ body {
 .footer-brand h3 {
   font-family: var(--font-editorial);
   font-size: 2rem;
-  color: var(--color-lime);
+  color: var(--color-accent);
   margin-bottom: 0.4rem;
 }
 
@@ -348,7 +351,7 @@ body {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-lime);
+  color: var(--color-accent);
   margin-bottom: 0.9rem;
 }
 
@@ -368,7 +371,7 @@ body {
 
 .footer-col a:hover {
   opacity: 1;
-  color: var(--color-lime);
+  color: var(--color-accent);
 }
 
 .footer-bottom {
@@ -384,7 +387,7 @@ body {
 }
 
 .footer-bottom a {
-  color: var(--color-lime);
+  color: var(--color-accent);
   cursor: pointer;
 }
 
@@ -393,8 +396,23 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   SIDEBAR TOGGLE (responsive)
+   SIDEBAR TOGGLE
+   Works everywhere: on desktop it collapses/expands the fixed sidebar,
+   on tablet/mobile it opens the off-canvas drawer.
    ------------------------------------------------------------------ */
-.sidebar-toggle {
-  display: none;
+.sidebar-toggle .msym {
+  font-size: 24px;
+}
+
+/* Desktop collapse state (mobile drawer state lives in responsive.css) */
+@media (min-width: 1025px) {
+  body.sidebar-collapsed .sidebar {
+    transform: translateX(-105%);
+    box-shadow: none;
+  }
+
+  body.sidebar-collapsed .content,
+  body.sidebar-collapsed .site-footer {
+    margin-left: 0;
+  }
 }

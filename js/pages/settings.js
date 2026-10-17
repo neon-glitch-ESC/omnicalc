@@ -1,5 +1,5 @@
 /* OmniCalc - pages/settings.js
-   Settings: theme, precision, unit system, angle mode, rate refresh, data
+   Settings: precision, unit system, angle mode, rate refresh, data
    export/import/clear, storage & offline status, Pro unlock (honor system). */
 
 (function () {
@@ -38,8 +38,7 @@
     }) + '' +
       '<div class="grid-2">' +
       '  <div class="panel">' +
-      '    <span class="panel-title">Appearance & format</span>' +
-      switchRow('setDark', 'Dark mode', 'Paper turns to night-ink with lime accents.', s.theme === 'dark') +
+      '    <span class="panel-title">Format</span>' +
       selectRow('setDecimals', 'Decimal precision',
       [['auto', 'Auto (smart)'], ['2', '2 decimals'], ['3', '3 decimals'], ['4', '4 decimals'], ['6', '6 decimals'], ['8', '8 decimals'], ['0', 'Integer']], s.decimals) +
       switchRow('setGrouping', 'Thousands separators', 'Show 1,000,000 instead of 1000000.', s.grouping) +
@@ -98,7 +97,7 @@
       '    <div class="row">' +
       '      <input class="input mono" id="proKey" placeholder="OC-XXXX-XXXX" style="max-width:240px" aria-label="License key">' +
       '      <button class="btn btn-primary btn-sm" id="proApply" type="button">' + OC.iconHTML('key') + 'Apply key</button>' +
-      '      <span class="tag ' + (s.premium ? 'tag-lime' : '') + '" id="proState">' + (s.premium ? 'Pro active' : 'Free tier') + '</span>' +
+      '      <span class="tag ' + (s.premium ? 'tag-accent' : '') + '" id="proState">' + (s.premium ? 'Pro active' : 'Free tier') + '</span>' +
       '    </div>' +
       '</div>' +
 
@@ -112,15 +111,6 @@
     OC.hydrateIcons(page);
 
     /* ---------------- wiring ---------------- */
-
-    OC.qs('#setDark', page).addEventListener('click', function () {
-      var dark = OC.settings().theme !== 'dark';
-      OC.saveSettings({ theme: dark ? 'dark' : 'light' });
-      OC.applyTheme(OC.settings().theme);
-      this.classList.toggle('on', dark);
-      this.setAttribute('aria-checked', String(dark));
-      OC.qs('#themeToggle') && OC.qs('#themeToggle').blur();
-    });
 
     OC.qs('#setGrouping', page).addEventListener('click', function () {
       var on = !OC.settings().grouping;
@@ -197,11 +187,11 @@
       if (ok) {
         OC.saveSettings({ premium: true });
         state.textContent = 'Pro active';
-        state.classList.add('tag-lime');
+        state.classList.add('tag-accent');
         alert('Pro unlocked — thank you!');
       } else {
         state.textContent = 'Invalid key format';
-        state.classList.remove('tag-lime');
+        state.classList.remove('tag-accent');
       }
     });
   }
@@ -213,7 +203,7 @@
       icon: 'settings',
       group: 'system',
       desc: 'Preferences, data and offline status.',
-      keywords: 'settings preferences theme dark mode decimals units export import clear data privacy',
+      keywords: 'settings preferences decimals units export import clear data privacy',
       render: renderSettings
     });
   };

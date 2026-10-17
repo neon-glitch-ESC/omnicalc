@@ -1,5 +1,5 @@
 /* OmniCalc - app.js
-   Bootstrapper: theme, route registration, sidebar, header controls, SW, search. */
+   Bootstrapper: route registration, sidebar, header controls, SW, search. */
 
 (function () {
   'use strict';
@@ -62,25 +62,53 @@
     var sidebar = OC.qs('#sidebar');
     var overlay = OC.qs('#sidebarOverlay');
     var toggle = OC.qs('#sidebarToggle');
+    var mobileQuery = window.matchMedia('(max-width: 1024px)');
 
-    function setOpen(open) {
+    function isMobile() { return mobileQuery.matches; }
+
+    /* Mobile/tablet: off-canvas drawer */
+    function setDrawer(open) {
       sidebar.classList.toggle('open', open);
       overlay.classList.toggle('show', open);
-      toggle.setAttribute('aria-expanded', String(open));
+      if (isMobile()) toggle.setAttribute('aria-expanded', String(open));
+    }
+
+    /* Desktop: collapse the fixed sidebar */
+    function setCollapsed(collapsed, persist) {
+      document.body.classList.toggle('sidebar-collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      if (persist) OC.uiState.setSidebarCollapsed(collapsed);
+    }
+
+    /* restore the desktop preference from a previous visit */
+    if (!isMobile() && OC.uiState.sidebarCollapsed()) {
+      setCollapsed(true, false);
+    } else {
+      toggle.setAttribute('aria-expanded', String(isMobile() ? 'false' : 'true'));
     }
 
     toggle.addEventListener('click', function () {
-      setOpen(!sidebar.classList.contains('open'));
+      if (isMobile()) {
+        setDrawer(!sidebar.classList.contains('open'));
+      } else {
+        setCollapsed(!document.body.classList.contains('sidebar-collapsed'), true);
+      }
     });
-    overlay.addEventListener('click', function () { setOpen(false); });
-    document.addEventListener('omnicalc:navigate', function () { setOpen(false); });
 
-    OC.qs('#themeToggle').addEventListener('click', function () {
-      var next = OC.settings().theme === 'dark' ? 'light' : 'dark';
-      OC.saveSettings({ theme: next });
-      OC.applyTheme(next);
-      OC.bus.emit('themechange', next);
-    });
+    overlay.addEventListener('click', function () { setDrawer(false); });
+    document.addEventListener('omnicalc:navigate', function () { setDrawer(false); });
+
+    /* keep state sane when crossing the breakpoint (rotate / resize) */
+    function onBreakpoint() {
+      if (isMobile()) {
+        toggle.setAttribute('aria-expanded', String(sidebar.classList.contains('open')));
+      } else {
+        setDrawer(false);
+        toggle.setAttribute('aria-expanded', String(!document.body.classList.contains('sidebar-collapsed')));
+      }
+    }
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpoint);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpoint);
 
     /* "/" focuses the search box */
     window.addEventListener('keydown', function (e) {
@@ -103,21 +131,6 @@
   }
 
   function boot() {
-    /* first-run theme follows the OS preference; ?theme=dark|light forces one */
-    var urlTheme = null;
-    try {
-      urlTheme = new URLSearchParams(location.search).get('theme');
-    } catch (e) { /* ignore */ }
-    if (urlTheme === 'dark' || urlTheme === 'light') {
-      OC.saveSettings({ theme: urlTheme });
-    } else {
-      var stored = OC.store.read('settings', null);
-      if (stored === null && window.matchMedia) {
-        OC.saveSettings({ theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' });
-      }
-    }
-    OC.applyTheme(OC.settings().theme);
-
     /* register every route group (order shapes the sidebar and home grids) */
     OC.registerHome();
     OC.registerGenericConverters();
