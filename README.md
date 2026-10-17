@@ -1,65 +1,169 @@
-# OmniCalc — The Universal Calculator & Converter
+<div align="center">
 
-A single-page, installable web app in **pure HTML5 + CSS3 + vanilla JavaScript** — no frameworks, no backend, no build tools. Open `index.html` and everything works; serve it over http(s) and it becomes a full offline PWA.
+# 🧮 OmniCalc
 
-## Highlights
+### The Universal Calculator & Converter
 
-- **Calculators** — Standard, Scientific (shunting-yard parser, no `eval()`), Programmer (BIN/OCT/DEC/HEX, bitwise, 8/16/32/64-bit two's complement via BigInt), Graphing (canvas pan/zoom/table), Matrix (det, inverse, `Ax = b`), Financial (EMI + amortization + CSV, compound + chart, simple, tip, tax/VAT, discount/markup, ROI, break-even), Date & Time (diff, age, add/subtract, live countdown, work days, world clock).
-- **Converters** — 30+ categories and 300+ units: length, mass, volume, area, temperature (7 scales incl. Réaumur/Delisle/Newton), speed, time, angle, pressure, energy, power, force, torque, flow, viscosity (dynamic + kinematic), fuel economy, digital storage (1000 vs 1024), transfer rates, screen/typography, radiation, historic & obscure units (cubit, smoot, shaku, li, verst…), cooking (ingredient densities, oven marks, recipe scaler), apparel sizing, number systems & encodings (base-N, Roman, Unicode, Base64, Morse), custom formula builder.
-- **Live data** — fiat currency (exchangerate-api, 120+ codes), crypto (CoinGecko, ~50 coins), precious metals (editable reference prices), pre-Euro currencies at exact legal rates. All cached to localStorage; offline fallback with clear "cached/offline" banners.
-- **Everything local** — favorites, calculator history, custom converters, world-clock zones and settings live in `localStorage`. Export/import JSON in Settings; "Clear all data" wipes it.
-- **Style** — cold "Monet" palette: indigo night surfaces, light-blue accents, violet secondary highlights. Paper-style editorial system (Playfair Display / Google Sans / Fira Code), hard offset shadows, dark sidebar with a collapsible desktop sidebar and off-canvas drawer on mobile. Dark-only by design — no theme switching. Material Symbols icons (locally subsetted, 88 KB, works offline).
+**7 calculators · 32 converter categories · 300+ units · 120+ currencies · ~50 coins**
 
-## Run it
+*Everything runs in your browser. Nothing is uploaded. It works with your Wi-Fi off.*
 
-Double-click `index.html` — everything except the service worker works from `file://`.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![Vanilla JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![PWA](https://img.shields.io/badge/PWA-installable%20%C2%B7%20offline--first-8fb8ff?style=flat-square)
+![Dependencies](https://img.shields.io/badge/dependencies-0-b9a3ff?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-43%20passing-3fb950?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-2ea043?style=flat-square)
 
-For the full PWA (offline cache + install prompt), serve the folder over http(s):
+<br>
 
-```bash
-# any static server, e.g.
-npx serve .
-# or Python
-python -m http.server 8080
-# or VS Code "Live Server" extension
-```
+<a href="assets/images/WebApp.png"><img src="assets/images/WebApp.png" alt="OmniCalc home screen — universal search over a live reference ticker" width="860"></a>
 
-Then open the printed URL. In Chrome/Edge use the install icon in the address bar to add OmniCalc to your desktop or home screen.
+<sub><i>One search box converts anything — the sidebar holds every tool.</i></sub>
 
-## Tests
+</div>
 
-Open `tests.html` in a browser. 43 assertions cover the expression parser, every conversion family (sample reference values), number systems, live-data payload parsers, search parsing and data integrity. No test framework needed.
+---
 
-Command-line alternatives (no dependencies): `node tools/run-tests.js` runs the same suite in Node, and `tools/debug-layout.html` opened in a browser audits every page for horizontal overflow at phone widths inside 390px iframes.
+## ✨ What is this?
 
-## Project structure
+**OmniCalc** is a single-page web app written in **pure HTML5 + CSS3 + vanilla JavaScript** — no frameworks, no backend, no build step, no `npm install`. Open `index.html` and it just works; serve it over http(s) and it becomes a complete **offline PWA** you can install on your desktop or phone.
 
-```
-index.html            app shell (header, ticker, sidebar, footer)
-manifest.json         PWA manifest
-sw.js                 service worker (precache + stale-while-revalidate)
-css/                  reset, variables/tokens, layout, components, responsive, fonts
+> **One tab. Every calculation.** Standard & scientific math, programmer bases, graphs, matrices, loans, dates — and 300+ units of measure across 32 categories.
+
+| | | |
+|---|---|---|
+| 🧮 **7 calculators** — everyday math to finance | 🔄 **32 converter categories** — 300+ units | 🌐 **Live rates** — fiat, crypto, metals |
+| 🔍 **Universal search** — natural language | 📴 **Works offline** — install once, use anywhere | 🔒 **Private** — no accounts, no analytics |
+
+---
+
+## 🚀 Quick start
+
+| Way | How | Best for |
+|---|---|---|
+| **Double-click** | Open `index.html` | Trying it in 5 seconds |
+| **Static server** | `npx serve .` or `python -m http.server 8080` | The full PWA (service worker needs http) |
+| **VS Code** | *Live Server* extension → Go Live | Development |
+
+Then, in Chrome or Edge, click the **install icon in the address bar** to add OmniCalc to your desktop or home screen. Installed, it launches like a native app and keeps working with no network.
+
+### 🔍 Try typing this
+
+| You type | You get |
+|---|---|
+| `10 km to miles` | 6.2137 miles |
+| `100 usd to eur` | Live exchange rate conversion |
+| `350 f to c` | 176.667 °C |
+| `2 GiB to MB` | Binary vs decimal storage, handled correctly |
+| `1 cup flour in grams` | ≈ 120 g (ingredient densities built in) |
+| `bmi` | Jumps straight to the Health calculator |
+
+---
+
+## 🧮 Calculators
+
+| Calculator | What it does | Highlights |
+|---|---|---|
+| **Standard** | Everyday arithmetic | Memory keys, history tape (tap to reuse · Clear button), full keyboard support |
+| **Scientific** | Trig, logs, powers, combinatorics | DEG / RAD / GRAD, nCr / nPr, factorials, constants, `Ans` — shunting-yard parser, **no `eval()`** |
+| **Programmer** | Base conversion + bitwise math | BIN / OCT / DEC / HEX, 8 / 16 / 32 / 64-bit two's complement via **BigInt** |
+| **Graphing** | Function plotting | Canvas with pan & zoom, up to 3 curves, value table |
+| **Matrix** | Linear algebra | Determinant, inverse, `Ax = b`, transpose |
+| **Financial** | Money math | EMI + amortization (CSV export), compound interest + chart, simple interest, tip, tax/VAT, discount & markup, ROI, break-even |
+| **Date & Time** | Time math | Difference, age, add/subtract, **live countdown**, work-days, world clock |
+
+## 🔄 Converters
+
+| Category | Examples |
+|---|---|
+| **Length & Distance** | meters, feet, miles, nautical miles, light-years, parsecs |
+| **Weight & Mass** | grams, pounds, ounces, stones, carats, tonnes |
+| **Volume & Capacity** | liters, gallons, cups, tablespoons, barrels |
+| **Area** | m², acres, hectares, sq ft, barns |
+| **Temperature** | °C, °F, K, Rankine, Réaumur, Delisle, Newton |
+| **Speed** | km/h, mph, knots, m/s, Mach |
+| **Fuel economy** | mpg (US/UK), L/100 km, km/L |
+| **Pressure · Energy · Power** | Pa, bar, psi, atm · joules, kcal, kWh, BTU · watts, hp (mech/metric/electrical), dBm |
+| **Force · Torque · Flow** | newtons, lbf, dynes · N·m, lbf·ft · m³/s, CFM, GPM |
+| **Viscosity** | dynamic (Pa·s, P, cP) + kinematic (m²/s, St, cSt) |
+| **Digital storage & transfer** | bytes → yottabytes (**1000 vs 1024**), bps → Gbps |
+| **Screen & typography** | px, pt, em, rem, mm (CSS 96 dpi) |
+| **Angle · Radiation** | degrees, radians, gradians, turns · sievert, gray, rem, becquerel, curie |
+| **Health** | BMI, BMR, TDEE, body fat, ideal weight, water intake |
+| **Cooking** | ingredient densities, oven marks, recipe scaler |
+| **Apparel sizing** | shoes, shirts, rings (US / EU / UK / JP / cm) |
+| **Currency & crypto** | 120+ fiat, ~50 coins, precious metals, pre-Euro at **exact legal rates** |
+| **Historic & obscure** | cubit, smoot, shaku, li, verst, span… |
+| **Number systems & encoding** | base-N (2–36), Roman numerals, Unicode, Base64, Morse |
+| **Custom** | Build your own formula converter |
+
+---
+
+## 🌐 Live data, with graceful offline fallback
+
+- **Fiat currency** (120+ codes) — three-provider chain: exchangerate-api → jsDelivr currency-api → frankfurter.app. Cached 1 hour, then bundled reference values.
+- **Crypto** (~50 coins) — CoinGecko public API, cached.
+- **Precious metals** — editable reference prices.
+- **Pre-Euro currencies** — the exact irrevocable fixed rates.
+
+Whatever the network does, the UI always tells you what you're looking at — *live*, *cached X ago*, or *offline reference*.
+
+## 🔒 Private by design
+
+Favorites, history, custom converters and settings live only in your browser's `localStorage`. No account, no analytics, no server — export/import everything as JSON in **Settings**, or wipe it all with one click.
+
+---
+
+## 🎨 Design
+
+- Dark-only **cold "Monet" palette** — deep indigo surfaces, light-blue accents, violet highlights — with bold editorial typography (Playfair Display / Google Sans / Fira Code) and hard offset shadows.
+- **Material Symbols** icons, locally subsetted to **88 KB** — the icons work offline too.
+- Responsive: fixed sidebar with a **desktop collapse toggle** + **off-canvas drawer** on mobile.
+
+## 🧪 Tests
+
+**43 assertions, zero dependencies** — covering the expression parser, every conversion family (against reference values), number systems, live-data parsers, search parsing and data integrity.
+
+| Runner | Command |
+|---|---|
+| Browser | Open `tests.html` |
+| Node | `node tools/run-tests.js` |
+| Layout audit | Open `tools/debug-layout.html` — checks every page for overflow at phone widths |
+
+## 📁 Project structure
+
+```text
+index.html                 app shell (header · ticker · sidebar · footer)
+manifest.json · sw.js      PWA manifest + offline service worker
+CHANGELOG.md · LICENSE     version history · MIT
+css/                       design tokens, layout, components, responsive, fonts
 js/
-  icons.js            generated Material Symbols codepoint map
-  utils.js  store.js  expression engine (expr.js)  search.js  router.js  app.js
-  data/               static unit tables, currency/crypto seeds, culinary, apparel
-  converters/         generic engine, live (currency/crypto/metals/legacy), custom
-  tools/              numbers & encoding, health, culinary, apparel
-  calculators/        basic, scientific, programmer, financial, datetime, graphing, matrix
-  pages/              home, settings
-tools/refresh-icons.ps1   regenerates the subsetted icon font + js/icons.js
-tests.html + js/tests.js  zero-dependency test runner
+  app.js · router.js · store.js · utils.js · expr.js · search.js · components.js
+  icons.js                 generated Material Symbols codepoint map
+  data/                    unit tables, currency/crypto seeds, culinary, apparel
+  converters/              generic engine · live rates · custom builder
+  tools/                   number systems · health · culinary · apparel
+  calculators/             standard, scientific, programmer, graphing, matrix, financial, datetime
+  pages/                   home · settings
+assets/                    fonts (icons) · icons (PWA) · images (screenshots)
+tools/                     icon-font generator · Node test runner · layout audit
 ```
 
-## Version history
+## ⚠️ Known limits
 
-See [CHANGELOG.md](CHANGELOG.md) for what changed in each release.
-
-## Notes & known limits
-
-- License-key unlock is an honor-system stub (client-side format check only) — see Settings → Pro.
-- Public rate APIs are rate-limited; the app caches for 1 hour, falls back across three fiat providers (exchangerate-api → jsDelivr currency-api → frankfurter.app) and finally to bundled reference values, always labelled in the UI.
+- The pro unlock is an **honor-system stub** (client-side format check) — see *Settings → Pro*.
+- Public rate APIs are rate-limited: the app caches for 1 hour and falls back across three fiat providers before using bundled values.
 - Historical units and sizing charts are common-reference approximations (documented inline).
-- Inflation calculator was intentionally left to a future release (needs a bundled CPI dataset).
+- An inflation calculator is left for a future release (needs a bundled CPI dataset).
 
-Data sources: NIST/ISO conversion factors, exchangerate-api.com (open endpoint) with jsDelivr currency-api and frankfurter.app as fallbacks, CoinGecko public API for crypto, USDA-style ingredient densities, official Euro fixed conversion rates.
+## 📜 Version history
+
+See **[CHANGELOG.md](CHANGELOG.md)** — latest: **v1.1.1**.
+
+## 📄 License
+
+MIT © [neon-glitch-ESC](https://github.com/neon-glitch-ESC) — see [LICENSE](LICENSE).
+
+<sub>Data sources: NIST/ISO conversion factors · exchangerate-api (open endpoint) with jsDelivr currency-api and frankfurter.app fallbacks · CoinGecko for crypto · USDA-style ingredient densities · official Euro fixed conversion rates.</sub>
