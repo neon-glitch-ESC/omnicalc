@@ -81,10 +81,18 @@
     }).join('') + '</div>';
   };
 
-  /* Wire tabs inside root; onChange(id). */
+  /* Wire tabs inside root; onChange(id). Keeps the active chip state in sync. */
   ui.wireTabs = function (root, onChange) {
-    OC.qsa('[data-tab]', root).forEach(function (btn) {
-      btn.addEventListener('click', function () { onChange(btn.getAttribute('data-tab')); });
+    var tabs = OC.qsa('[data-tab]', root);
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          var on = t === btn;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', String(on));
+        });
+        onChange(btn.getAttribute('data-tab'));
+      });
     });
   };
 
