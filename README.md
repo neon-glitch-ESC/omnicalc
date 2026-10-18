@@ -8,6 +8,7 @@
 
 *Everything runs in your browser. Nothing is uploaded. It works with your Wi-Fi off.*
 
+[![Live demo](https://img.shields.io/badge/live_demo-open_the_app-8fb8ff?style=flat-square&logo=githubpages&logoColor=white)](https://neon-glitch-esc.github.io/omnicalc/)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![Vanilla JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
@@ -22,13 +23,15 @@
 
 <sub><i>One search box converts anything — the sidebar holds every tool.</i></sub>
 
+**[▶ Open the live app](https://neon-glitch-esc.github.io/omnicalc/)** — hosted on GitHub Pages, nothing to install
+
 </div>
 
 ---
 
 ## ✨ What is this?
 
-**OmniCalc** is a single-page web app written in **pure HTML5 + CSS3 + vanilla JavaScript** — no frameworks, no backend, no build step, no `npm install`. Open `index.html` and it just works; serve it over http(s) and it becomes a complete **offline PWA** you can install on your desktop or phone.
+**OmniCalc** is a single-page web app written in **pure HTML5 + CSS3 + vanilla JavaScript** — no frameworks, no backend, no build step, no `npm install`. Open the [live app](https://neon-glitch-esc.github.io/omnicalc/) or `index.html` and it just works; served over http(s) it becomes a complete **offline PWA** you can install on your desktop or phone.
 
 > **One tab. Every calculation.** Standard & scientific math, programmer bases, graphs, matrices, loans, dates — and 300+ units of measure across 32 categories.
 
@@ -43,11 +46,12 @@
 
 | Way | How | Best for |
 |---|---|---|
-| **Double-click** | Open `index.html` | Trying it in 5 seconds |
-| **Static server** | `npx serve .` or `python -m http.server 8080` | The full PWA (service worker needs http) |
+| **Just open it** | **[neon-glitch-esc.github.io/omnicalc](https://neon-glitch-esc.github.io/omnicalc/)** | Trying it in 2 seconds — full app, installable as a PWA |
+| **Double-click** | Open `index.html` | Fully local — everything except the service worker runs from `file://` |
+| **Static server** | `npx serve .` or `python -m http.server 8080` | The full PWA locally (the service worker needs http) |
 | **VS Code** | *Live Server* extension → Go Live | Development |
 
-Then, in Chrome or Edge, click the **install icon in the address bar** to add OmniCalc to your desktop or home screen. Installed, it launches like a native app and keeps working with no network.
+Then, in Chrome or Edge, open the live site (or any http(s) copy) and click the **install icon in the address bar** to add OmniCalc to your desktop or home screen. Installed, it launches like a native app and keeps working with no network.
 
 ### 🔍 Try typing this
 
@@ -132,12 +136,17 @@ Favorites, history, custom converters and settings live only in your browser's `
 | Node | `node tools/run-tests.js` |
 | Layout audit | Open `tools/debug-layout.html` — checks every page for overflow at phone widths |
 
+## ☁️ Hosting
+
+OmniCalc is a **static site** — push to `main` and GitHub Actions (`.github/workflows/static.yml`) deploys the whole folder to **GitHub Pages** automatically. The [live demo](https://neon-glitch-esc.github.io/omnicalc/) is exactly that deployment. Any static host (Netlify, Cloudflare Pages, a plain web server) works the same way: upload the folder, done.
+
 ## 📁 Project structure
 
 ```text
 index.html                 app shell (header · ticker · sidebar · footer)
 manifest.json · sw.js      PWA manifest + offline service worker
 CHANGELOG.md · LICENSE     version history · MIT
+.github/workflows/         auto-deploy to GitHub Pages on push to main
 css/                       design tokens, layout, components, responsive, fonts
 js/
   app.js · router.js · store.js · utils.js · expr.js · search.js · components.js
